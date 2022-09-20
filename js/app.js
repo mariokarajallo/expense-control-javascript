@@ -19,8 +19,14 @@ class Presupuesto {
   }
 }
 
-class UI {}
+class UI {
+  insertarPrespuesto(cantidad) {
+    console.log(cantidad);
+  }
+}
 
+// instaciar
+const ui = new UI();
 let presupuesto;
 
 //! FUNCIONES
@@ -40,6 +46,8 @@ function preguntarPresupuesto() {
   }
 
   // Instanciamos la clase Presupuesto y una vez tenemos el prespuesto por parte del usuario pasamos al constructor
-  presupuesto = new Presupuesto(PresupuestoUsuario);
+  presupuesto = new Presupuesto(presupuestoUsuario);
   console.log(presupuesto);
+
+  ui.insertarPrespuesto(presupuesto);
 }
