@@ -9,17 +9,26 @@ function eventListeners() {
   document.addEventListener("DOMContentLoaded", preguntarPresupuesto);
 }
 //! CLASSES
-class Presupuesto {}
+class Presupuesto {
+  //
+  constructor(presupuesto) {
+    // Number -> convierste cualquier numero que sea string a number
+    this.presupuesto = Number(presupuesto);
+    this.restante = Number(presupuesto);
+    this.gastos = [];
+  }
+}
 
 class UI {}
+
+let presupuesto;
 
 //! FUNCIONES
 function preguntarPresupuesto() {
   const presupuestoUsuario = prompt("Cual es tu presupuesto?");
-  console.log(presupuestoUsuario);
+  // console.log(presupuestoUsuario);
 
   //validar prompt
-  // Number -> convierte cualquier numero que sea string a number
   if (
     presupuestoUsuario === "" ||
     presupuestoUsuario === null ||
@@ -29,4 +38,8 @@ function preguntarPresupuesto() {
     //recarga la pagina actual
     window.location.reload();
   }
+
+  // Instanciamos la clase Presupuesto y una vez tenemos el prespuesto por parte del usuario pasamos al constructor
+  presupuesto = new Presupuesto(PresupuestoUsuario);
+  console.log(presupuesto);
 }
