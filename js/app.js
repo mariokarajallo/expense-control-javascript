@@ -9,6 +9,9 @@ function eventListeners() {
   document.addEventListener("DOMContentLoaded", preguntarPresupuesto);
 }
 //! CLASSES
+class Presupuesto {}
+
+class UI {}
 
 //! FUNCIONES
 function preguntarPresupuesto() {
@@ -16,16 +19,14 @@ function preguntarPresupuesto() {
   console.log(presupuestoUsuario);
 
   //validar prompt
+  // Number -> convierte cualquier numero que sea string a number
   if (
     presupuestoUsuario === "" ||
     presupuestoUsuario === null ||
     isNaN(presupuestoUsuario) ||
     presupuestoUsuario <= 0
   ) {
+    //recarga la pagina actual
     window.location.reload();
   }
-
-  // convierte cualquier numero que sea string a number
-
-  //recarga la pagina actual
 }
