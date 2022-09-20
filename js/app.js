@@ -30,6 +30,31 @@ class UI {
     document.querySelector("#total").textContent = presupuesto;
     document.querySelector("#restante").textContent = restante;
   }
+
+  imprimirAlerta(mensaje, tipo) {
+    console.log("imprimiralerta...s");
+    //crear el elemento DIV para insertar en el HTML
+    const divMensaje = document.createElement("div");
+    divMensaje.classList.add("text-center", "alert");
+
+    // valida el TIPO de error para mostrar un estilo de mensaje
+    if (tipo === "error") {
+      divMensaje.classList.add("alert-danger"); //agregamos el estilo alert-danger
+    } else {
+      divMensaje.classList.add("alert-success");
+    }
+
+    // asignamos el mensaje  a nuestro elemento DIV
+    divMensaje.textContent = mensaje;
+
+    //insertamos el DIV en el HTML
+    document.querySelector(".primario").insertBefore(divMensaje, formulario);
+
+    //quitar la alerta del HTML luego de 3seg
+    setTimeout(() => {
+      divMensaje.remove();
+    }, 3000);
+  }
 }
 
 // instaciar
@@ -61,9 +86,22 @@ function preguntarPresupuesto() {
 
 //agregar gastos al HTML
 function agregarGasto(e) {
-  e.preventDafault();
+  e.preventDefault();
 
   // leer los datos del formulario y asiganmos el valor a una variable
   const nombre = document.querySelector("#gasto").value;
   const cantidad = document.querySelector("#cantidad").value;
+
+  console.log(nombre, cantidad);
+  // validar formulario
+  if (nombre === "" || cantidad === "") {
+    //pasamos un mensaje y el tipo de mensaje al metodo de UI
+    ui.imprimirAlerta("Ambos campos son obligatorios", "error");
+    return; // para que no se ejecute las siguientes lineas de codigo
+  } else if (cantidad <= 0 || isNaN(cantidad)) {
+    ui.imprimirAlerta("cantidad no valida", "error");
+    return; // para que no se ejecute las siguientes lineas de codigo
+  }
+
+  console.log("agregandoa gasto...");
 }
