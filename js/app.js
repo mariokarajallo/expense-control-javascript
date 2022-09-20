@@ -62,4 +62,8 @@ function preguntarPresupuesto() {
 //agregar gastos al HTML
 function agregarGasto(e) {
   e.preventDafault();
+
+  // leer los datos del formulario y asiganmos el valor a una variable
+  const nombre = document.querySelector("#gasto").value;
+  const cantidad = document.querySelector("#cantidad").value;
 }
