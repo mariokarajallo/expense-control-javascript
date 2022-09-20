@@ -7,6 +7,8 @@ eventListeners();
 function eventListeners() {
   //al cargar todo el proyecto solicita el presupuesto
   document.addEventListener("DOMContentLoaded", preguntarPresupuesto);
+
+  document.addEventListener("submit", agregarGasto);
 }
 //! CLASSES
 class Presupuesto {
@@ -55,4 +57,9 @@ function preguntarPresupuesto() {
   console.log(presupuesto);
 
   ui.insertarPrespuesto(presupuesto);
+}
+
+//agregar gastos al HTML
+function agregarGasto(e) {
+  e.preventDafault();
 }
