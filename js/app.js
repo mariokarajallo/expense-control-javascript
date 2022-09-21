@@ -19,6 +19,12 @@ class Presupuesto {
     this.restante = Number(presupuesto);
     this.gastos = [];
   }
+
+  //metodo para crear un nuevo gasto y luego anadir ese gasto al HTML
+  nuevoGasto(gasto) {
+    this.gastos = [...this.gastos, gasto];
+    console.log("objeto gasto", this.gastos);
+  }
 }
 
 class UI {
@@ -32,7 +38,6 @@ class UI {
   }
 
   imprimirAlerta(mensaje, tipo) {
-    console.log("imprimiralerta...s");
     //crear el elemento DIV para insertar en el HTML
     const divMensaje = document.createElement("div");
     divMensaje.classList.add("text-center", "alert");
@@ -90,9 +95,8 @@ function agregarGasto(e) {
 
   // leer los datos del formulario y asiganmos el valor a una variable
   const nombre = document.querySelector("#gasto").value;
-  const cantidad = document.querySelector("#cantidad").value;
+  const cantidad = Number(document.querySelector("#cantidad").value);
 
-  console.log(nombre, cantidad);
   // validar formulario
   if (nombre === "" || cantidad === "") {
     //pasamos un mensaje y el tipo de mensaje al metodo de UI
@@ -103,5 +107,15 @@ function agregarGasto(e) {
     return; // para que no se ejecute las siguientes lineas de codigo
   }
 
-  console.log("agregandoa gasto...");
+  // generar un objeto con el gasto
+  const gasto = { nombre, cantidad, id: Date.now() };
+
+  //anade un nuevo gasto
+  presupuesto.nuevoGasto(gasto);
+
+  // mensaje de todo bien en el formulario
+  ui.imprimirAlerta("gasto agregado correctamente");
+
+  //reinicia el formulario
+  formulario.reset();
 }
