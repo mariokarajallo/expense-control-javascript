@@ -22,6 +22,7 @@ class Presupuesto {
 
   //metodo para crear un nuevo gasto y luego anadir ese gasto al HTML
   nuevoGasto(gasto) {
+    //agregamos a la propiedad gasto(array) el gasto que recibimos del formulario
     this.gastos = [...this.gastos, gasto];
     console.log("objeto gasto", this.gastos);
   }
@@ -61,7 +62,28 @@ class UI {
     }, 3000);
   }
 
-  agregarGastoListado(gasto) {}
+  agregarGastoListado(gasto) {
+    // iterar sobre los gastos
+    gastos.forEach(gasto => {
+      const = {cantidad, nombre, id } = gasto;
+
+      // crear un elemento LI
+      const nuevoGasto = document.createElement('li');
+      nuevoGasto.className = 'list-group-item d-flex justify-content-between align-items-center';
+      nuevoGasto.dataset.id = id;
+
+      // agregar el HTML del gasto
+      nuevoGasto.innerHTML=`${nombre} <span class='badge badge-primary' badge-pill> ${cantidad} </span>`
+
+      // Boton para borrar el gasto
+      const btnBorrar = document.createElement('button')
+      btnBorrar.classList.add('btn','btn-danger','borrar-gasto')
+      nuevoGasto.appendChild(btnBorrar)
+
+      // Agregar al HTML
+      gastoListado.appendChild(nuevoGasto)
+    });
+  }
 }
 
 // instaciar
