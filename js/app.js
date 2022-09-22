@@ -24,11 +24,24 @@ class Presupuesto {
   nuevoGasto(gasto) {
     //agregamos a la propiedad gasto(array) el gasto que recibimos del formulario
     this.gastos = [...this.gastos, gasto];
-    console.log("objeto gasto", this.gastos);
+    //mandamos llamar a calcularRestante cada vez que se gener un nuevo gasto
+    this.calcularRestante();
+    // console.log("objeto gasto", this.gastos);
   }
 
   //calcularRestante
-  calcularRestante() {}
+  calcularRestante() {
+    //obtener cuanto dinero tenemos gastado
+    // iteramos sobre el objeto de gasto, y utilizamos array metod ->reduce() para calcular cuando dinero hemos gastado
+    // reduce: 1er parametro(total, acumulado), 2do(objeto actual que se sumara) -> valor inicial 0
+    const gastado = this.gastos.reduce(
+      (total, gasto) => total + gasto.cantidad,
+      0
+    );
+
+    this.restante -= gastado;
+    console.log("llevamos gastado", gastado, "restante", this.restante);
+  }
 }
 
 class UI {
@@ -98,6 +111,8 @@ class UI {
       gastoListado.removeChild(gastoListado.firstChild);
     }
   }
+
+  actualizarRestante(restante) {}
 }
 
 // instaciar
@@ -155,8 +170,11 @@ function agregarGasto(e) {
   ui.imprimirAlerta("gasto agregado correctamente");
 
   // imprimir/listar los gastos en el HTML
-  const { gastos } = presupuesto;
+  const { gastos, restante } = presupuesto;
   ui.agregarGastoListado(gastos);
+
+  // enviamos la propiedad restante del objeto prespuesto para calcular y mostrar en el HTML
+  ui.actualizarRestante(restante);
 
   //reinicia el formulario
   formulario.reset();
