@@ -39,7 +39,7 @@ class Presupuesto {
       0
     );
 
-    this.restante -= gastado;
+    this.restante = this.presupuesto - gastado;
     console.log("llevamos gastado", gastado, "restante", this.restante);
   }
 }
@@ -112,7 +112,10 @@ class UI {
     }
   }
 
-  actualizarRestante(restante) {}
+  actualizarRestante(restante) {
+    //asiganamos al HTML el valor que recibimos de restante
+    document.querySelector("#restante").textContent = restante;
+  }
 }
 
 // instaciar
