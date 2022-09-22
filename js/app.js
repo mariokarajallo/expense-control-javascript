@@ -26,6 +26,9 @@ class Presupuesto {
     this.gastos = [...this.gastos, gasto];
     console.log("objeto gasto", this.gastos);
   }
+
+  //calcularRestante
+  calcularRestante() {}
 }
 
 class UI {
@@ -76,7 +79,7 @@ class UI {
       nuevoGasto.dataset.id = id;
 
       // agregar el HTML del gasto
-      nuevoGasto.innerHTML = `${nombre} <span class='badge badge-primary' badge-pill> ${cantidad} </span>`;
+      nuevoGasto.innerHTML = `${nombre} <span class='badge badge-primary' badge-pill> $ ${cantidad} </span>`;
 
       // Boton para borrar el gasto
       const btnBorrar = document.createElement("button");
