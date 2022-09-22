@@ -63,26 +63,37 @@ class UI {
   }
 
   agregarGastoListado(gasto) {
+    // elimina el HTML previo
+    this.limpiarHTMl();
     // iterar sobre los gastos
-    gastos.forEach(gasto => {
-      const = {cantidad, nombre, id } = gasto;
+    gasto.forEach((gasto) => {
+      const { cantidad, nombre, id } = gasto;
 
       // crear un elemento LI
-      const nuevoGasto = document.createElement('li');
-      nuevoGasto.className = 'list-group-item d-flex justify-content-between align-items-center';
+      const nuevoGasto = document.createElement("li");
+      nuevoGasto.className =
+        "list-group-item d-flex justify-content-between align-items-center";
       nuevoGasto.dataset.id = id;
 
       // agregar el HTML del gasto
-      nuevoGasto.innerHTML=`${nombre} <span class='badge badge-primary' badge-pill> ${cantidad} </span>`
+      nuevoGasto.innerHTML = `${nombre} <span class='badge badge-primary' badge-pill> ${cantidad} </span>`;
 
       // Boton para borrar el gasto
-      const btnBorrar = document.createElement('button')
-      btnBorrar.classList.add('btn','btn-danger','borrar-gasto')
-      nuevoGasto.appendChild(btnBorrar)
+      const btnBorrar = document.createElement("button");
+      btnBorrar.classList.add("btn", "btn-danger", "borrar-gasto");
+      btnBorrar.innerHTML = "borra &times";
+      nuevoGasto.appendChild(btnBorrar);
 
       // Agregar al HTML
-      gastoListado.appendChild(nuevoGasto)
+      gastoListado.appendChild(nuevoGasto);
     });
+  }
+
+  limpiarHTMl() {
+    //seleccionamos el primer nodo de nuestro listado de gasto definido en la cabecera
+    while (gastoListado.firstChild) {
+      gastoListado.removeChild(gastoListado.firstChild);
+    }
   }
 }
 
