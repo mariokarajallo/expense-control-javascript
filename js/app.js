@@ -46,7 +46,8 @@ class Presupuesto {
   eliminarGasto(id) {
     // filtramos (itera el array gastos) y traemos todos los elementos menos el id que estamos recibiendo ( ya que es este el que queremos eliminar)
     this.gastos = this.gastos.filter((gasto) => gasto.id !== id);
-
+    //mandamos llamar a calcularRestante cada vez que se elimine un nuevo gasto
+    this.calcularRestante();
     console.log(this.gastos);
   }
 }
@@ -142,6 +143,10 @@ class UI {
       //comprobamos si gasto mas del 50%, le damos estilo 'alert-warning'
       restanteDiv.classList.remove("alert-success");
       restanteDiv.classList.add("alert-warning");
+    } else {
+      //comprobamos el reembolso (osea cuando eliminamos un gasto) suma a nuestro restante
+      restanteDiv.classList.remove("alert-danger", "alert-warning");
+      restanteDiv.classList.add("alert-success");
     }
 
     // si el total es 0 o menor
@@ -230,7 +235,13 @@ function eliminarGasto(id) {
 
   // elimina gasto del HTML
   // destructuramos el array gasto del objeto presupuesto, con los gastos ya actualizados gracias al metodo anterior
-  const { gastos } = presupuesto;
+  const { gastos, restante } = presupuesto;
   // mostramos los gastos actualizados pasando el array
   ui.mostrarGastos(gastos);
+
+  // enviamos la propiedad restante del objeto prespuesto para calcular y mostrar en el HTML
+  ui.actualizarRestante(restante);
+
+  //comprobar presupuesto, como no podemos pasar solo el valor del presupuesto, debemos pasar el objeto entero
+  ui.comprobarPresupuesto(presupuesto);
 }
