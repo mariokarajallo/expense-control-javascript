@@ -117,7 +117,31 @@ class UI {
     document.querySelector("#restante").textContent = restante;
   }
 
-  comprobarPresupuesto(presupuestoObj) {}
+  comprobarPresupuesto(presupuestoObj) {
+    //destructuramos nuestro objeto
+    const { presupuesto, restante } = presupuestoObj;
+
+    //seleccionamos el div, que va a cambiar de color segun porcentaje de restante
+    const restanteDiv = document.querySelector(".restante");
+
+    //comprobamos si gasto mas del 75% le damos estilo 'alert-danger'
+    if (presupuesto / 4 > restante) {
+      restanteDiv.classList.remove("alert-success", "alert-warning");
+      restanteDiv.classList.add("alert-danger");
+    } else if (presupuesto / 2 > restante) {
+      //comprobamos si gasto mas del 50%, le damos estilo 'alert-warning'
+      restanteDiv.classList.remove("alert-success");
+      restanteDiv.classList.add("alert-warning");
+    }
+
+    // si el total es 0 o menor
+    if (restante <= 0) {
+      ui.imprimirAlerta("el presupuesto se ha agotado", "error");
+
+      // desactivamos el boton de agregar para evitar seguir agregando
+      formulario.querySelector("button[type='submit']").disabled = true;
+    }
+  }
 }
 
 // instaciar
