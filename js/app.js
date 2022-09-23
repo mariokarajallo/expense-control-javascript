@@ -42,6 +42,13 @@ class Presupuesto {
     this.restante = this.presupuesto - gastado;
     console.log("llevamos gastado", gastado, "restante", this.restante);
   }
+
+  eliminarGasto(id) {
+    // filtramos (itera el array gastos) y traemos todos los elementos menos el id que estamos recibiendo ( ya que es este el que queremos eliminar)
+    this.gastos = this.gastos.filter((gasto) => gasto.id !== id);
+
+    console.log(this.gastos);
+  }
 }
 
 class UI {
@@ -78,7 +85,7 @@ class UI {
     }, 3000);
   }
 
-  agregarGastoListado(gasto) {
+  mostrarGastos(gasto) {
     // elimina el HTML previo
     this.limpiarHTMl();
     // iterar sobre los gastos
@@ -99,7 +106,7 @@ class UI {
       btnBorrar.classList.add("btn", "btn-danger", "borrar-gasto");
       btnBorrar.innerHTML = "borra &times";
       btnBorrar.onclick = () => {
-        eliminarGasto();
+        eliminarGasto(id);
       };
       nuevoGasto.appendChild(btnBorrar);
 
@@ -203,7 +210,7 @@ function agregarGasto(e) {
 
   // imprimir/listar los gastos en el HTML
   const { gastos, restante } = presupuesto;
-  ui.agregarGastoListado(gastos);
+  ui.mostrarGastos(gastos);
 
   // enviamos la propiedad restante del objeto prespuesto para calcular y mostrar en el HTML
   ui.actualizarRestante(restante);
@@ -213,4 +220,17 @@ function agregarGasto(e) {
 
   //reinicia el formulario
   formulario.reset();
+}
+
+//? funcion que recibe el ID de un gasto y manda eliminar ese gasto
+
+function eliminarGasto(id) {
+  // elimina gasto del objeto
+  presupuesto.eliminarGasto(id);
+
+  // elimina gasto del HTML
+  // destructuramos el array gasto del objeto presupuesto, con los gastos ya actualizados gracias al metodo anterior
+  const { gastos } = presupuesto;
+  // mostramos los gastos actualizados pasando el array
+  ui.mostrarGastos(gastos);
 }
