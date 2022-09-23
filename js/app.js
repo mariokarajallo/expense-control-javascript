@@ -98,6 +98,9 @@ class UI {
       const btnBorrar = document.createElement("button");
       btnBorrar.classList.add("btn", "btn-danger", "borrar-gasto");
       btnBorrar.innerHTML = "borra &times";
+      btnBorrar.onclick = () => {
+        eliminarGasto();
+      };
       nuevoGasto.appendChild(btnBorrar);
 
       // Agregar al HTML
