@@ -116,6 +116,8 @@ class UI {
     //asiganamos al HTML el valor que recibimos de restante
     document.querySelector("#restante").textContent = restante;
   }
+
+  comprobarPresupuesto(presupuestoObj) {}
 }
 
 // instaciar
@@ -178,6 +180,9 @@ function agregarGasto(e) {
 
   // enviamos la propiedad restante del objeto prespuesto para calcular y mostrar en el HTML
   ui.actualizarRestante(restante);
+
+  //comprobar presupuesto, como no podemos pasar solo el valor del presupuesto, debemos pasar el objeto entero
+  ui.comprobarPresupuesto(presupuesto);
 
   //reinicia el formulario
   formulario.reset();
