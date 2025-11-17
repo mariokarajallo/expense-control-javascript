@@ -59,7 +59,8 @@ python3 -m http.server 8000
 
 ## **Estructura de archivos**
 
-📂 expense-control-javascript
+```bash
+📂 expense-control-javascript/
 ├── index.html
 ├── css/
 │   ├── bootstrap.min.css
@@ -69,6 +70,8 @@ python3 -m http.server 8000
 ├── expense-control.gif
 ├── LICENSE
 └── README.md
+```
+
 
 
 - `index.html` - Estructura principal y formulario.
